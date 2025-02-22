@@ -81,4 +81,3 @@ webdriver-manager==4.0.0
 Werkzeug==3.0.3
 wsproto==1.2.0
 yarl==1.17.1
-libffi-dev
