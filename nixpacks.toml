@@ -1,2 +1,2 @@
 [phases.setup]
-nixPkgs = ["libffi", "gcc"]
+nixPkgs = ["python312", "libffi", "gcc"]
