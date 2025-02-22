@@ -1,2 +1,5 @@
 [phases.setup]
 nixPkgs = ["python312", "libffi", "gcc"]
+
+[phases.build]
+cmds = ["export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig"]
