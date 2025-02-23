@@ -1,4 +1,5 @@
 from flask import request, jsonify
+from flask_cors import cross_origin
 import openai
 import os
 
@@ -7,6 +8,7 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def setup_routes(app):
     @app.route('/generate-trip-overview', methods=['POST'])
+    @cross_origin(origins="https://hristians-dynamite-site.webflow.io")  # Allow Webflow
     def generate_trip_overview():
         """Generates a short 6-sentence trip overview."""
         try:
@@ -56,6 +58,7 @@ def setup_routes(app):
 
 
     @app.route('/generate-trip-breakdown', methods=['POST'])
+    @cross_origin(origins="https://hristians-dynamite-site.webflow.io")
     def generate_trip_breakdown():
         """Generates a high-level day-by-day itinerary."""
         try:
@@ -91,6 +94,7 @@ def setup_routes(app):
 
 
     @app.route('/generate-trip-details', methods=['POST'])
+    @cross_origin(origins="https://hristians-dynamite-site.webflow.io")
     def generate_trip_details():
         """Expands each day’s activities with descriptions, costs, and durations."""
         try:
