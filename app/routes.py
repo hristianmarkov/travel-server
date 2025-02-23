@@ -2,8 +2,8 @@ from flask import request, jsonify
 import openai
 import os
 
-# Load OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Initialize OpenAI client
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def setup_routes(app):
     @app.route('/generate-trip-overview', methods=['POST'])
@@ -37,13 +37,18 @@ def setup_routes(app):
             }}
             """
 
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "system", "content": "You are a travel assistant."},
-                          {"role": "user", "content": prompt}]
+            # OpenAI API Call
+            chat_completion = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "You are a professional travel agent"},
+                    {"role": "user", "content": prompt}
+                ]
             )
 
-            return jsonify(eval(response["choices"][0]["message"]["content"]))
+            itinerary = chat_completion.choices[0].message.content
+
+            return jsonify({"itinerary": itinerary}), 200
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
@@ -68,13 +73,17 @@ def setup_routes(app):
             }}
             """
 
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "system", "content": "You are a travel planner."},
-                          {"role": "user", "content": prompt}]
+            chat_completion = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "You are a professional travel agent"},
+                    {"role": "user", "content": prompt}
+                ]
             )
 
-            return jsonify(eval(response["choices"][0]["message"]["content"]))
+            itinerary = chat_completion.choices[0].message.content
+
+            return jsonify({"itinerary": itinerary}), 200
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
@@ -112,13 +121,17 @@ def setup_routes(app):
             }}
             """
 
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "system", "content": "You are a travel assistant."},
-                          {"role": "user", "content": prompt}]
+            chat_completion = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "You are a professional travel agent"},
+                    {"role": "user", "content": prompt}
+                ]
             )
 
-            return jsonify(eval(response["choices"][0]["message"]["content"]))
+            itinerary = chat_completion.choices[0].message.content
+
+            return jsonify({"itinerary": itinerary}), 200
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
