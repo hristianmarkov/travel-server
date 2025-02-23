@@ -1,5 +1,6 @@
 [phases.setup]
-nixPkgs = ["python312", "libffi", "gcc"]
-
-[phases.build]
-cmds = ["export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig"]
+nixPkgs = ["python312", "libffi", "gcc", "pkg-config"]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install --no-cache-dir -r requirements.txt"
+]
