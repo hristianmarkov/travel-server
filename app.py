@@ -1,10 +1,12 @@
 from flask import Flask
-from app.routes import setup_routes  # This works since "routes.py" is inside the /app folder
+from app.routes import setup_routes  # Ensure this matches your folder structure
 
-app = Flask(__name__)
+app = Flask(__name__)  # ✅ Ensure this is correctly defined
 
-# Setup all routes from routes.py
-setup_routes(app)
+setup_routes(app)  # Registers the routes
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080)  # Ensure it runs on port 8080 for Railway
+if __name__ != "__main__":  # Gunicorn expects the app instance
+    application = app  # ✅ Add this line
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
