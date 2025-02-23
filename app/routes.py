@@ -23,19 +23,20 @@ def setup_routes(app):
 
             # Construct prompt
             prompt = f"""
-            Provide a short overview for a {budget} budget trip to {destination} from {departure_date} to {return_date}.
-            The trip focuses on {focus}, with {accommodation} accommodation, and a {pace} travel pace.
+            You are a professional travel agent. Return only valid JSON (no extra text, quotes, or disclaimers) with exactly six fields.
 
-            Generate six JSON fields:
+            Generate the following JSON structure for a {budget} budget trip to {destination} from {departure_date} to {return_date}, focusing on {focus}, with {accommodation} accommodation and a {pace} travel pace:
+
             {{
-              "date": "Why this is a good time to visit {destination}.",
-              "budget": "Why this budget is good for the trip.",
-              "location": "What makes {destination} great.",
-              "focus": "Why {destination} is good for {focus}.",
-              "accommodation": "Why {accommodation} is suitable.",
-              "pace": "Why {pace} travel pace fits this trip."
+            "date": "Explain why {departure_date} to {return_date} is a good time to visit {destination}.",
+            "budget": "Explain why a {budget} budget fits this trip well.",
+            "location": "Explain what makes {destination} unique or attractive.",
+            "focus": "Explain why {destination} is good for {focus}.",
+            "accommodation": "Explain why {accommodation} is suitable for this trip.",
+            "pace": "Explain why a {pace} travel pace works best."
             }}
             """
+
 
             # OpenAI API Call
             chat_completion = client.chat.completions.create(
