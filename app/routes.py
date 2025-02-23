@@ -23,7 +23,7 @@ def setup_routes(app):
 
             # Construct prompt
             prompt = f"""
-            You are a professional travel agent. Return only valid JSON (no extra text, quotes, or disclaimers) with exactly six fields.
+            You are a professional travel agent. Return only valid JSON (no extra text, quotes, or disclaimers) with exactly six fields. Each fields should be 15 words maximum.
 
             Generate the following JSON structure for a {budget} budget trip to {destination} from {departure_date} to {return_date}, focusing on {focus}, with {accommodation} accommodation and a {pace} travel pace:
 
